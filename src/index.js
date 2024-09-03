@@ -1,17 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './css/style.css'
+import ContextProvider from './context/Context';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <ContextProvider>
     <App />
-  </React.StrictMode>
+  </ContextProvider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+//Summary
+/* Wrapping App with ContextProvider makes the context available to the entire component tree within App.
+
+This setup allows for global state management and avoids the need for prop drilling.
+
+Components inside App can access and use the context values and functions via the useContext hook. */
