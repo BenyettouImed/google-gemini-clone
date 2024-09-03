@@ -16,28 +16,28 @@ const Hero = () => {
   const exp3 = 'Brinstorm team bonding activities for our work retreat';
   const exp4 = 'Improve the readability of the following code';
 
-  const delayResult = ()=>{
-    setResultProgres([resultData[0]]);
-    let i = 1;
+  const delayResult = () => {
     
+    let i = 0;
+    setResultProgres([resultData[i]]);
     const myInterval = setInterval(() => {
-      if (i<resultData.length){
-        setResultProgres(prev => [...prev, resultData[i]])
+      if (i < resultData.length) {
+        setResultProgres((prev) => [...prev, resultData[i]]);
         i++;
+      } else {
+        clearInterval(myInterval);
       }
-      else{
-        clearInterval(myInterval)
-      }
-      
     }, 300);
-    return ()=> clearInterval(myInterval);
-  }
-
-  useEffect(()=>{
-    if (resultData){
-      delayResult();
+  
+    return myInterval;
+  };
+  
+  useEffect(() => {
+    if (resultData) {
+      const intervalId = delayResult();
+      return () => clearInterval(intervalId);
     }
-  }, [resultData])
+  }, [resultData]);
 
   return (
     <section className='flex flex-col gap-12 '>
